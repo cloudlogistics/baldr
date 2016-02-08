@@ -55,4 +55,20 @@ describe Baldr::Parser do
     end
   end
 
+  Dir.glob('spec/support/edi_files/valid/856/18.EDI').each do |file|
+    context file do
+      it 'should include error when set856 :id => "PID" is "Pid"' do
+        input = File.read(file)
+        # Set PID to Pid.
+        Baldr::Grammar::Version4010::Set856.structure[:level][2][:level][5][:id] = 'Pid'
+        parser = Baldr::Parser.new(input)
+        parser.error.should include "segment SE is required, but nothing was found"
+        # Reset to prevent remaining tests from breaking. Check for no errors.
+        Baldr::Grammar::Version4010::Set856.structure[:level][2][:level][5][:id] = 'PID'
+        parser = Baldr::Parser.new(input)
+        parser.error.should be_nil
+      end
+    end
+  end
+
 end
