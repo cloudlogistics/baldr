@@ -22,7 +22,7 @@ module Baldr::Grammar::Version4010::Set856
         {id: 'SLN', min: 0, max: 1000},
         {id: 'PRF', min: 0, max: 1},
         {id: 'PO4', min: 0, max: 1},
-        {id: 'Pid', min: 0, max: 200},
+        {id: 'PID', min: 0, max: 200},
         {id: 'MEA', min: 0, max: 40},
         {id: 'PWK', min: 0, max: 25},
         {id: 'PKG', min: 0, max: 25},
