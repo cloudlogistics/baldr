@@ -1,6 +1,46 @@
 require 'spec_helper'
 
 describe Baldr::Parser do
+  let(:separators) {{
+    segment: '~'.bytes.to_a,
+    element: '*',
+    component: '<'
+  }}
+  let(:grammar) {Baldr::Test::CustomGrammar}
+
+  describe '.bare_transaction?' do
+    it 'is true if no envelope exists' do
+      input = File.read(File.dirname(__FILE__) + '/support/edi_files/custom_grammar/850/2.EDI')
+      parser = Baldr::Parser.new(input, separators: separators, grammar: grammar)
+      expect(parser.bare_transaction?).to eq(true)
+    end
+
+    it 'is false if an envelope exists' do
+      input = File.read(File.dirname(__FILE__) + '/support/edi_files/valid/204/1.EDI')
+      parser = Baldr::Parser.new(input)
+      expect(parser.bare_transaction?).to eq(false)
+    end
+  end
+
+  describe '.each' do
+    it 'yields the envelope' do
+      input = File.read(File.dirname(__FILE__) + '/support/edi_files/valid/204/1.EDI')
+      parser = Baldr::Parser.new(input)
+      parser.each do |transaction, envelope|
+        expect(envelope).to_not eq nil
+        expect(transaction).to_not eq nil
+      end
+    end
+
+    it 'yields nil if no envelope is present' do
+      input = File.read(File.dirname(__FILE__) + '/support/edi_files/custom_grammar/850/2.EDI')
+      parser = Baldr::Parser.new(input, separators: separators, grammar: grammar)
+      parser.each do |transaction, envelope|
+        expect(envelope).to eq nil
+        expect(transaction).to_not eq nil
+      end
+    end
+  end
 
   Dir.glob('spec/support/edi_files/valid/**/*.EDI').each do |file|
     context file do
