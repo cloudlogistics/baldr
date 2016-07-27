@@ -30,5 +30,5 @@ describe Baldr::Utils do
       end
     end
   end
-
+  
 end

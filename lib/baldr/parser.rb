@@ -122,6 +122,7 @@ class Baldr::Parser
   end
 
   def build_segment(enumerator, grammar, structure)
+   
     current = enumerator.peek
 
     while structure[:id] == current[0]
