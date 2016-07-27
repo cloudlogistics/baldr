@@ -18,8 +18,26 @@ class Baldr::Parser
     @error.nil?
   end
 
+  def bare_transaction?
+    @root_type == :transaction
+  end
+
+  def each &block
+    if bare_transaction?
+      transactions.each do |transaction|
+        yield transaction, nil
+      end
+    else
+      envelopes.each do |envelope|
+        envelope.transactions.each do |transaction|
+          yield transaction, envelope
+        end
+      end
+    end
+  end
+
   def envelopes
-    if @root_type == :envelope
+    if !bare_transaction?
       @roots
     else
       raise Baldr::Error, "interchange doesn't have envelopes"
@@ -27,7 +45,7 @@ class Baldr::Parser
   end
 
   def transactions
-    if @root_type == :transaction
+    if bare_transaction?
       @roots
     else
       @roots.map(&:transactions).flatten
@@ -41,6 +59,10 @@ class Baldr::Parser
     end
   rescue Baldr::Error => e
     @error = e.message
+  end
+
+  def valid?
+    @error.nil?
   end
 
   protected

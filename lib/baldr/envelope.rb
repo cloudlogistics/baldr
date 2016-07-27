@@ -112,6 +112,10 @@ class Baldr::Envelope < Baldr::Segment
     @func_group_loop ||= @children.select{ |c| c.id == 'GS' }.first
   end
 
+  def functional_group
+    func_group_loop.segments.first
+  end
+
   def record_def
     Baldr::Grammar::Envelope::RECORD_DEFS['ISA']
   end
