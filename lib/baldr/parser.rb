@@ -6,7 +6,7 @@ class Baldr::Parser
     @input = input
     @grammar = params[:grammar]
     @separators = params[:separators]
-    
+
     parse
 
     if params[:skip_validation] != true && successful?
@@ -144,7 +144,7 @@ class Baldr::Parser
   end
 
   def build_segment(enumerator, grammar, structure)
-   
+
     current = enumerator.peek
 
     while structure[:id] == current[0]

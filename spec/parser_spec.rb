@@ -111,15 +111,4 @@ describe Baldr::Parser do
     end
   end
 
-  Dir.glob('spec/support/edi_files/invalid/204/1.EDI').each do |file|
-    context file do
-      it 'should not be invalid due to having too many NTEs' do
-        input = File.read(file)
-        expect(input.scan(/NTE/).size > 10).to eq true
-        parser = Baldr::Parser.new(input)
-        expect(parser.error).to be nil
-      end
-    end
-  end
-
 end

@@ -2,13 +2,15 @@ module Baldr::Validator
 
   extend self
 
-  def validate!(envelope, grammar)
+  def validate!(envelope, grammar, options={})
+    @truncate_loops = options[:truncate_loops]
     validate_tree!(envelope, grammar, grammar.structure)
   end
 
+
   protected
 
-  def validate_tree!(segment, grammar, structure)
+  def validate_tree!(segment, grammar, structure, options={})
     record_defs = grammar.record_defs
     raise Baldr::Error::ValidationError, "unknown segment #{segment.id}" unless record_defs[segment.id]
 
@@ -24,10 +26,11 @@ module Baldr::Validator
     l = 0
     structure.fetch(:level, []).each do |s|
       loop = segment.children[l]
-      if loop && loop.id.to_s == s[:id]
-        check_loop_count(loop, s)
 
-        loop.segments.each { |child| validate_tree!(child, sub_grammar || grammar, s) }
+      if loop && loop.id.to_s == s[:id]
+        check_loop_count(loop, s, @truncate_loops)
+
+        loop.segments.each { |child| validate_tree!(child, (sub_grammar || grammar), s, @truncate_loops) }
 
         l += 1
       elsif loop
@@ -47,9 +50,9 @@ module Baldr::Validator
     end
   end
 
-  def check_loop_count(loop, s)
-    if (s[:id] == 'NTE' && loop.count > s[:max])
-      loop = handle_nte(loop, s)
+  def check_loop_count(loop, s, truncate_loops)
+    if ((loop.count > s[:max]) && truncate_loops)
+      loop = remove_excess_segments(loop, s)
     end
 
     raise Baldr::Error::ValidationError, "#{loop.id} loop is too long: #{loop.count} segments, maximum #{s[:max]}" if loop.count > s[:max]
@@ -113,8 +116,8 @@ module Baldr::Validator
 
   end
 
-  def handle_nte(loop, nte)
-    difference = loop.segments.size - nte[:max]
+  def remove_excess_segments(loop, segment)
+    difference = loop.segments.size - segment[:max]
     (loop.segments - (loop.segments.pop(difference)))
   end
 
