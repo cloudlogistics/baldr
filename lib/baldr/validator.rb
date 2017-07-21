@@ -48,6 +48,10 @@ module Baldr::Validator
   end
 
   def check_loop_count(loop, s)
+    if (s[:id] == 'NTE' && loop.count > s[:max])
+      loop = handle_nte(loop, s)
+    end
+
     raise Baldr::Error::ValidationError, "#{loop.id} loop is too long: #{loop.count} segments, maximum #{s[:max]}" if loop.count > s[:max]
     raise Baldr::Error::ValidationError, "#{loop.id} loop is too short: #{loop.count} segments, minimum #{s[:min]}" if loop.count < s[:min]
   end
@@ -107,6 +111,11 @@ module Baldr::Validator
 
   def check_complex(r, element)
 
+  end
+
+  def handle_nte(loop, nte)
+    difference = loop.segments.size - nte[:max]
+    (loop.segments - (loop.segments.pop(difference)))
   end
 
 end
