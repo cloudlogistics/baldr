@@ -3,10 +3,7 @@ module Baldr::Validator
   extend self
 
   def validate!(envelope, grammar, options={})
-    if options.has_key?(:truncate_loops)
-      options[:truncate_loops] = options.fetch(:truncate_loops)
-    end
-
+    options[:truncate_loops] = options.fetch(:truncate_loops, false)
     validate_tree!(envelope, grammar, grammar.structure, options)
   end
 
