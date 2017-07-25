@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Baldr::Validator do
-  # Baldr::Validator.validate!(e, @grammar)
   let(:separators) {{
     segment: [10],
     element: '*',

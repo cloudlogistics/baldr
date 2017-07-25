@@ -3,14 +3,14 @@ module Baldr::Validator
   extend self
 
   def validate!(envelope, grammar, options={})
-    @truncate_loops = options[:truncate_loops]
-    validate_tree!(envelope, grammar, grammar.structure)
+    options[:truncate_loops] = options.fetch(:truncate_loops)
+    validate_tree!(envelope, grammar, grammar.structure, options)
   end
 
 
   protected
 
-  def validate_tree!(segment, grammar, structure, options={})
+  def validate_tree!(segment, grammar, structure, options)
     record_defs = grammar.record_defs
     raise Baldr::Error::ValidationError, "unknown segment #{segment.id}" unless record_defs[segment.id]
 
@@ -28,9 +28,9 @@ module Baldr::Validator
       loop = segment.children[l]
 
       if loop && loop.id.to_s == s[:id]
-        check_loop_count(loop, s, @truncate_loops)
+        check_loop_count(loop, s, options[:truncate_loops])
 
-        loop.segments.each { |child| validate_tree!(child, (sub_grammar || grammar), s, @truncate_loops) }
+        loop.segments.each { |child| validate_tree!(child, (sub_grammar || grammar), s, options) }
 
         l += 1
       elsif loop
