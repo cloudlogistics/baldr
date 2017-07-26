@@ -2,13 +2,15 @@ module Baldr::Validator
 
   extend self
 
-  def validate!(envelope, grammar)
-    validate_tree!(envelope, grammar, grammar.structure)
+  def validate!(envelope, grammar, options={})
+    options[:truncate_loops] = options.fetch(:truncate_loops, false)
+    validate_tree!(envelope, grammar, grammar.structure, options)
   end
+
 
   protected
 
-  def validate_tree!(segment, grammar, structure)
+  def validate_tree!(segment, grammar, structure, options)
     record_defs = grammar.record_defs
     raise Baldr::Error::ValidationError, "unknown segment #{segment.id}" unless record_defs[segment.id]
 
@@ -24,10 +26,11 @@ module Baldr::Validator
     l = 0
     structure.fetch(:level, []).each do |s|
       loop = segment.children[l]
-      if loop && loop.id.to_s == s[:id]
-        check_loop_count(loop, s)
 
-        loop.segments.each { |child| validate_tree!(child, sub_grammar || grammar, s) }
+      if loop && loop.id.to_s == s[:id]
+        check_loop_count(loop, s, options[:truncate_loops])
+
+        loop.segments.each { |child| validate_tree!(child, (sub_grammar || grammar), s, options) }
 
         l += 1
       elsif loop
@@ -47,7 +50,11 @@ module Baldr::Validator
     end
   end
 
-  def check_loop_count(loop, s)
+  def check_loop_count(loop, s, truncate_loops)
+    if ((loop.count > s[:max]) && truncate_loops)
+      loop = remove_excess_segments(loop, s)
+    end
+
     raise Baldr::Error::ValidationError, "#{loop.id} loop is too long: #{loop.count} segments, maximum #{s[:max]}" if loop.count > s[:max]
     raise Baldr::Error::ValidationError, "#{loop.id} loop is too short: #{loop.count} segments, minimum #{s[:min]}" if loop.count < s[:min]
   end
@@ -107,6 +114,11 @@ module Baldr::Validator
 
   def check_complex(r, element)
 
+  end
+
+  def remove_excess_segments(loop, segment)
+    difference = loop.segments.size - segment[:max]
+    (loop.segments - (loop.segments.pop(difference)))
   end
 
 end

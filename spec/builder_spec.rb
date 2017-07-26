@@ -326,7 +326,7 @@ describe Baldr::Builder do
 
     separators = {
       component: '>',
-      segment: "~\r\n",
+      segment: "\n",
       element: '*'
     }
     output = Baldr::Renderer::X12.draw(b.envelope, {separators: separators})
