@@ -27,6 +27,7 @@ module Baldr::Grammar::Version4010::Set310
       {id: 'R4', min: 1, max: 20, level: [
         {id: 'DTM', min: 0, max: 15},
       ]},
+      {id: 'H3', min: 0, max: 6},
       {id: 'LX', min: 1, max: 9999, level: [
         {id: 'N7', min: 0, max: 9999, level: [
           {id: 'QTY', min: 0, max: 1},
@@ -34,10 +35,10 @@ module Baldr::Grammar::Version4010::Set310
         ]},
        {id: 'L0', min: 0, max: 120, level:[
          {id: 'L5', min: 0, max: 9999},
-       ]}, 
+       ]},
       ]},
       {id: 'L3', min: 1, max: 1},
-      {id: 'L1', min: 0, max: 20}, 
+      {id: 'L1', min: 0, max: 20},
       {id: 'SE', min: 1, max: 1},
     ]
   }.freeze
