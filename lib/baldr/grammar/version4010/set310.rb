@@ -27,6 +27,8 @@ module Baldr::Grammar::Version4010::Set310
       {id: 'R4', min: 1, max: 20, level: [
         {id: 'DTM', min: 0, max: 15},
       ]},
+      {id: 'R2', min: 0, max: 13},
+      {id: 'H3', min: 0, max: 6},
       {id: 'LX', min: 1, max: 9999, level: [
         {id: 'N7', min: 0, max: 9999, level: [
           {id: 'QTY', min: 0, max: 1},
