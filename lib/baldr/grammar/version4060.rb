@@ -12,7 +12,7 @@ module Baldr::Grammar::Version4060
     const_name = "Set#{id}"
     if self.const_defined?(const_name)
       self.const_get(const_name)
-    else    
+    else
       raise Baldr::Error, "unknown transaction set: #{id}"
     end
   end
@@ -5599,7 +5599,7 @@ module Baldr::Grammar::Version4060
       {id: 'LAD10', required: false, max: 48, type: :string},
       {id: 'LAD11', required: false, max: 2, type: :id},
       {id: 'LAD12', required: false, max: 48, type: :string},
-      {id: 'LAD13', required: false, max: 50, type: :string},
+      {id: 'LAD13', required: false, max: 200, type: :string},
     ],
     'LC' => [
       {id: 'LC01', required: true, max: 3, type: :id},
