@@ -33,7 +33,6 @@ LX*1
 N7*YMLU*YMLU876622*136*G*******40********61****40HC
 L0*1***136*G*1.631*X*1*PCS
 L5*1*SAID TO CONTAIN
-L3*136*B***110130******1*K
 L1*1***27500****165****Pick-up Charges
 L1*2***5000****300****Export Customs Clearance
 L1*3***7500****201****B/L Fee Export
@@ -47,6 +46,7 @@ L1*10***2500****641****Port Security Fee Import
 L1*11***8500****658****CFS Charge (Import)
 L1*12***3500****604****Service Fee Import
 L1*13***326****830****Chassis Rental Fee Import
+L3*136*B***110130******1*K
 SE*48*0001
 GE*1*21
 IEA*1*000000021

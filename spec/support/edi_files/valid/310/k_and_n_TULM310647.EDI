@@ -31,7 +31,6 @@ LX*1
 N7*TLLU*TLLU460040*1150*G*******40********63****40HC
 L0*1***1150*G*22.8*X*1*PCS
 L5*1*CONTAINER SAID TO CONTAIN
-L3*1150*B***372500******1*K
 L1*1***14000****151****Cartage & Arranging
 L1*2***5000****300****Export Customs Clearance
 L1*3***3500****201****B/L Fee Export
@@ -41,6 +40,7 @@ L1*6***29000****406****Container Stuffing Export
 L1*7***223000****550****Seafreight
 L1*8***77500****800****Import Drayage (Haulage)
 L1*9***9000****830****Chassis Rental Fee Import
+L3*1150*B***372500******1*K
 SE*42*0001
 GE*1*20
 IEA*1*000000020
