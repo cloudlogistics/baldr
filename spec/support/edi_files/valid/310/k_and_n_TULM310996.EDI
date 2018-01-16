@@ -32,7 +32,6 @@ LX*1
 N7*MOTU*MOTU672484*3.5*G***************61
 L0*1***3.5*G*0.04*X*1*PCS
 L5*1*B747/767 BLOCKER DOOR
-L3*3.5*B***91638******1*K
 L1*1***12****074****Peak Hour Traffic Mitigat
 L1*2***19500****165****Pick-up Charges
 L1*3***12****187****Clean Truck Fee (CTF) Exp
@@ -49,6 +48,7 @@ L1*13***2500****641****Port Security Fee Import
 L1*14***3500****604****Service Fee Import
 L1*15***7000****808****Loading of Truck
 L1*16***8****830****Chassis Rental Fee Import
+L3*3.5*B***91638******1*K
 SE*50*0001
 GE*1*23
 IEA*1*000000023

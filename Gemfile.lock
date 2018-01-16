@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    baldr (0.10.4)
+    baldr (0.10.5)
       activesupport
 
 GEM
@@ -18,7 +18,7 @@ GEM
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     method_source (0.8.2)
-    minitest (5.10.3)
+    minitest (5.11.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)

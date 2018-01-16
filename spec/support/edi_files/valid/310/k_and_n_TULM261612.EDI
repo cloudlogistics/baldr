@@ -22,7 +22,6 @@ LX*1
 N7*UESU*UESU432973*********************40GE
 N7*TRKU*TRKU403749*********************40GE
 L0*1***5480*G*100*X*2*CTN
-L3*5480*B***1379708******2*K
 L1*1***8000****201****B/L Fee Export
 L1*2***756000****550****Seafreight
 L1*3***45968****813****Fuel Charge Oncarriage
@@ -31,6 +30,7 @@ L1*5***74000****800****Import Drayage (Haulage)
 L1*6***419740****802****Delivery
 L1*7***10000****830****Chassis Rental Fee Import
 C3*USD
+L3*5480*B***1379708******2*K
 SE*32*0001
 GE*1*1013
 IEA*1*000001013

@@ -34,14 +34,15 @@ module Baldr::Grammar::Version4010::Set310
           {id: 'QTY', min: 0, max: 1},
           {id: 'M7', min: 0, max: 5}
         ]},
-       {id: 'L0', min: 0, max: 120, level:[
-         {id: 'L5', min: 0, max: 9999},
-       ]},
+        {id: 'L0', min: 0, max: 120, level:[
+          {id: 'L5', min: 0, max: 9999}
+        ]},
+        {id: 'L1', min: 0, max: 20, level:[
+          {id: 'C3', min: 0, max: 1}
+        ]}
       ]},
       {id: 'L3', min: 1, max: 1},
-      {id: 'L1', min: 0, max: 20},
-      {id: 'C3', min: 0, max: 1},
-      {id: 'SE', min: 1, max: 1},
+      {id: 'SE', min: 1, max: 1}
     ]
   }.freeze
 end
