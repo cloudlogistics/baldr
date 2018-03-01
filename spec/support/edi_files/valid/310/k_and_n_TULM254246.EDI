@@ -19,6 +19,7 @@ H3*FCL
 LX*1
 N7*NYKU*NYKU070198*********************40HC
 L0*1***1035*G*20.52*X*1*CTN
+L3*1035*B***372500******1*K
 L1*1***14000****151****Cartage & Arranging
 L1*2***5000****300****Export Customs Clearance
 L1*3***3500****201****B/L Fee Export
@@ -29,7 +30,6 @@ L1*7***223000****550****Seafreight
 L1*8***77500****800****Import Drayage (Haulage)
 L1*9***9000****830****Chassis Rental Fee Import
 C3*USD
-L3*1035*B***372500******1*K
 SE*31*0001
 GE*1*1014
 IEA*1*000001014
