@@ -6946,7 +6946,7 @@ module Baldr::Grammar::Version4010
     ],
     'OID' => [
       {id: 'OID01', required: false, max: 30, type: :string},
-      {id: 'OID02', required: false, max: 22, type: :string},
+      {id: 'OID02', required: false, max: 30, type: :string},
       {id: 'OID03', required: false, max: 30, type: :string},
       {id: 'OID04', required: false, max: 2, type: :id},
       {id: 'OID05', required: false, max: 15, type: :real},
