@@ -44,6 +44,11 @@ module Baldr::Validator
       raise Baldr::Error::ValidationError, "spare segments #{loop.id}"
     end
 
+    #If we have truncated loops, the segments may need to udpate any values that
+    #are based on the quantity
+    if options[:truncate_loops]
+      segment.prepare!
+    end
     method = "validate_#{segment.id.downcase}!"
     if grammar.respond_to?(method)
       grammar.send(method, segment)
