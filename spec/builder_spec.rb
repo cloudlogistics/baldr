@@ -461,6 +461,51 @@ describe Baldr::Builder do
     output.should eq input
   end
 
+  it 'should truncate special characters on draw' do
+    file = 'spec/support/edi_files/valid/204/1.EDI'
+    input = File.read(file)
+
+    #TODO: There is implicit knowledge of how the external file is constructed
+    #      here, as evidenced by the construction & assumption of separators.
+    #      Ideally, all of this should be in code.
+    separators = {
+      component: '>',
+      segment: "\n",
+      element: '*'
+    }
+
+    b = Baldr::Builder.new(
+      #standard_version_number: '',
+      sender_id: '4233372493',
+      sender_id_qualifier: 'ZZ',
+      receiver_id_qualifier: '02',
+      receiver_id: 'ODFL',
+      date_time: DateTime.parse('121109 1642'),
+      interchange_control_number: '000000002',
+      usage_indicator: 'P',
+      acknowledgment_requested: '1',
+      functional_groups_control_numbers: {
+        'SM' => '2'
+      }
+    )
+
+    GoodBuilderFromRealLife.new.build(b)
+
+    b.build_functional_groups
+    #Pull a value and substitute it for the relevant checked separators
+    value = b.envelope.transactions.first['S5'].first['G62'].first['G6204']
+    value = separators[:segment] + separators[:element] + value
+    b.envelope.transactions.first['S5'].first['G62'].first['G6204'] = value
+
+    b.prepare!
+    Baldr::Types.convert_before_render!(b.envelope, Baldr::Grammar::Envelope)
+    Baldr::Validator.validate!(b.envelope, Baldr::Grammar::Envelope)
+
+
+    output = Baldr::Renderer::X12.draw(b.envelope, {separators: separators})
+    output.should eq input
+  end
+
   it 'should throw error if too long and truncate is disabled' do
     b = Baldr::Builder.new(
       #standard_version_number: '',
