@@ -27,7 +27,7 @@ module Baldr::Renderer::X12
     #Due to the TODO item concerning the component separator, it is actively
     #removed from the below regex
     substitution_regex =
-      Regexp.new "[#{separators.reject{|k,_| k.to_s == "component" }.values.join}]+"
+      Regexp.new "#{Regexp.escape(separators[:element])}|#{Regexp.escape(separators[:segment])}"
 
     #This removes X12 control characters from any segement element that may have
     #them, removing potential parse conflicts.
