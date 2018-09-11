@@ -11,6 +11,7 @@ class Baldr::Builder
     end
 
     @functional_groups_control_numbers = params[:functional_groups_control_numbers] || {}
+    @receiver_code = params[:receiver_code]
   end
 
   def ST(&block)
@@ -42,7 +43,7 @@ class Baldr::Builder
       group = Baldr::FunctionalGroup.new
       group.functional_identifier_code = group_id
       group.application_senders_code = @envelope.sender_id
-      group.application_receivers_code = @envelope.receiver_id
+      group.application_receivers_code = @receiver_code.present? ? @receiver_code : @envelope.receiver_id
       group.version_release_industry_code = "#{@envelope.standard_version_number}0"
       group.date_time = @envelope.date_time
       group.group_control_number = @functional_groups_control_numbers[group_id]
