@@ -429,7 +429,7 @@ module Baldr::Grammar::Version4010
     'AT8' => [
       {id: 'AT801', required: false, max: 2, type: :id},
       {id: 'AT802', required: false, max: 1, type: :id},
-      {id: 'AT803', required: false, max: 10, type: :real},
+      {id: 'AT803', required: false, max: 11, type: :real},
       {id: 'AT804', required: false, max: 7, type: :number, decimals: 0},
       {id: 'AT805', required: false, max: 7, type: :number, decimals: 0},
       {id: 'AT806', required: false, max: 1, type: :id},
@@ -5473,7 +5473,7 @@ module Baldr::Grammar::Version4010
       {id: 'L1A02', required: false, max: 4, type: :id},
     ],
     'L3' => [
-      {id: 'L301', required: false, max: 10, type: :real},
+      {id: 'L301', required: false, max: 11, type: :real},
       {id: 'L302', required: false, max: 2, type: :id},
       {id: 'L303', required: false, max: 9, type: :real},
       {id: 'L304', required: false, max: 2, type: :id},
@@ -5592,7 +5592,7 @@ module Baldr::Grammar::Version4010
       {id: 'LAD03', required: false, max: 1, type: :id},
       {id: 'LAD04', required: false, max: 8, type: :real},
       {id: 'LAD05', required: false, max: 1, type: :id},
-      {id: 'LAD06', required: false, max: 10, type: :real},
+      {id: 'LAD06', required: false, max: 11, type: :real},
       {id: 'LAD07', required: false, max: 2, type: :id},
       {id: 'LAD08', required: false, max: 48, type: :string},
       {id: 'LAD09', required: false, max: 2, type: :id},
@@ -9277,7 +9277,7 @@ module Baldr::Grammar::Version4010
     'S5' => [
       {id: 'S501', required: true, max: 3, type: :number, decimals: 0},
       {id: 'S502', required: true, max: 2, type: :id},
-      {id: 'S503', required: false, max: 10, type: :real},
+      {id: 'S503', required: false, max: 11, type: :real},
       {id: 'S504', required: false, max: 1, type: :id},
       {id: 'S505', required: false, max: 10, type: :real},
       {id: 'S506', required: false, max: 2, type: :id},
