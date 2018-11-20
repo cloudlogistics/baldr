@@ -111,7 +111,7 @@ module Baldr::Validator
   end
 
   def check_real(r, element)
-    value = element.to_s.tr('.','')
+    value = element.to_s.tr('.-','')
     if r[:max] && value.length > r[:max]
       raise Baldr::Error::ValidationError,  "#{r[:id]} is too long: #{value.length} characters, maximum #{r[:max]}"
     end
