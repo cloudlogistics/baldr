@@ -23,7 +23,7 @@ class Baldr::Envelope < Baldr::Segment
     @helpers + [:receiver_id, :sender_id, :security_info, :authorization_info, :date_time]
   end
 
-  def initialize(id = 'ISA', custom_params: {})
+  def initialize(id = 'ISA', options: {})
     super(id)
 
     self.authorization_info_qualifier = '00'
@@ -39,7 +39,7 @@ class Baldr::Envelope < Baldr::Segment
     self.standard_version_number = '00401'
     self.acknowledgment_requested = '0'
     self.usage_indicator = 'P'
-    self.component_separator = custom_params[:component] || '>'
+    self.component_separator = options[:component] || '>'
   end
 
   def prepare!
