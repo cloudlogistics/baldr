@@ -1,3 +1,3 @@
 module Baldr
-  VERSION = '0.10.8'
+  VERSION = '0.10.11'
 end
