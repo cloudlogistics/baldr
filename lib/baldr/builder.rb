@@ -3,7 +3,7 @@ class Baldr::Builder
   attr_accessor :envelope
 
   def initialize(params = {})
-    @envelope = Baldr::Envelope.new(params[:options])
+    @envelope = Baldr::Envelope.new('ISA', **params[:options])
     @transactions = []
 
     Baldr::Envelope.helpers.each do |f|
